@@ -1,84 +1,38 @@
 package uni.fiis.team.vizzlan.domain.persona;
 
 public class Usuario {
-    private Integer cod;
+    private Integer codPersona;
+    private Integer codUsuario;
     private String tipoIdentificacion;
     private String identificacion;
     private String Nombres;
     private String Apellidos;
     private String cuenta;
     private String contrasenia;
+    private String tipoMecanismoContacto;
+    private String mecanismoContacto;
 
-    public Usuario(Integer cod, String tipoIdentificacion, String identificacion, String Nombres, String Apellidos) {
-        this.cod = cod;
+    public Usuario(Integer codPersona, Integer codUsuario, String tipoIdentificacion, String identificacion, String Nombres, String Apellidos, String cuenta, String contrasenia) {
+        this.codPersona = codPersona;
+        this.codUsuario = codUsuario;
         this.tipoIdentificacion = tipoIdentificacion;
         this.identificacion = identificacion;
         this.Nombres = Nombres;
         this.Apellidos = Apellidos;
-    }
-
-    public Usuario(Integer cod, String cuenta, String contrasenia) {
-        this.cod = cod;
         this.cuenta = cuenta;
         this.contrasenia = contrasenia;
     }
 
-    public Integer getCod() {
-        return cod;
-    }
-
-    public void setCod(Integer cod) {
-        this.cod = cod;
-    }
-
-    public String getTipoIdentificacion() {
-        return tipoIdentificacion;
-    }
-
-    public void setTipoIdentificacion(String tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
-    }
-
-    public String getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public String getNombres() {
-        return Nombres;
-    }
-
-    public void setNombres(String Nombres) {
+    public Usuario(Integer codPersona, String Nombres) {
+        this.codPersona = codPersona;
         this.Nombres = Nombres;
     }
 
-    public String getApellidos() {
-        return Apellidos;
-    }
-
-    public void setApellidos(String Apellidos) {
-        this.Apellidos = Apellidos;
-    }
-
-    public String getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(String cuenta) {
+    public Usuario(Integer codUsuario, String cuenta, String contrasenia) {
+        this.codUsuario = codUsuario;
         this.cuenta = cuenta;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-
     
     
 }
