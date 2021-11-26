@@ -17,6 +17,10 @@ public class PedidoNormal extends Pedido{
     public PedidoNormal(Integer codigo, Date fechaPedido, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
         super(codigo, fechaPedido, estadoPedido, descripcion, operador, comprador, envio, carroCompra);
     }
+
+    public PedidoNormal(Integer codigo, Date fechaPedido, String descripcion) {
+        super(codigo, fechaPedido, descripcion);
+    }
     
     
     

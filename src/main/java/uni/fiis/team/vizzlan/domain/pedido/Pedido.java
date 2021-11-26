@@ -27,6 +27,12 @@ public class Pedido {
         this.carroCompra = carroCompra;
     }
 
+    public Pedido(Integer codigo, Date fechaPedido, String descripcion) {
+        this.codigo = codigo;
+        this.fechaPedido = fechaPedido;
+        this.descripcion = descripcion;
+    }
+    
     public Integer getCodigo() {
         return codigo;
     }

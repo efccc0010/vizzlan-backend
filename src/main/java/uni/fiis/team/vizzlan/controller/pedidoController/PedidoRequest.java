@@ -12,9 +12,9 @@ import java.util.Date;
  * @author chiri
  */
 class PedidoRequest {
-        private Integer codigo ;
-        private Date fechaPedido;
-        private String descripcion;
+    private Integer codigo ;
+    private Date fechaPedido;
+    private String descripcion;
 
     public PedidoRequest(Integer codigo, Date fechaPedido, String descripcion) {
         this.codigo = codigo;

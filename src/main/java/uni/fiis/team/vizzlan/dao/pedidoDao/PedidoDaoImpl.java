@@ -8,17 +8,18 @@ package uni.fiis.team.vizzlan.dao.pedidoDao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompra;
 import uni.fiis.team.vizzlan.domain.pedido.Envio;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
-import uni.fiis.team.vizzlan.domain.persona.Usuario;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
 
 
@@ -28,27 +29,27 @@ public class PedidoDaoImpl implements PedidoDao{
     private JdbcTemplate template;
 
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
-        Connection conn = this.template.getDataSource().getConnection();
+        try{
+            Connection conn = this.template.getDataSource().getConnection();
+            String sql = "INSERT INTO pedido(idPedido,tipo,descripcion) values(?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1,p.getCodigo());
+            
+            /*String lastCrawlDate = "2014-01-28";
+            java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastCrawlDate);
+            // because PreparedStatement#setDate(..) expects a Java.sql.Date argument
+            java.sql.Date sqlDate = new Date(utilDate.getTime()); 
+            pst.setDate(2,sqlDate);*/
+            
+            pst.setString(3,"PEDIDO ESTANDAR");
+            pst.setString(4,p.getDescripcion());
+            pst.execute();
+            pst.close();
+            conn.close();
+        }catch(SQLException e){
+            System.out.println(e.getErrorCode());;
+        }
         
-        /*private Integer codigo ;
-        private Date fechaPedido;
-        private String estadoPedido;
-        private String descripcion;
-        private String operador;
-        private Usuario comprador;
-        private Double montoTotal;
-        private Envio envio;
-        private CarritoDeCompra carroCompra;*/
-        
-        String sql = "INSERT INTO pedido(idPedido,fechInicio,tipo,descripcion) values(?,?,?,?)";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,p.getCodigo());
-        pst.setDate(2, (Date) p.getFechaPedido());
-        pst.setString(3,"Normal");
-        pst.setString(4,p.getDescripcion());
-        pst.executeUpdate();
-        pst.close();
-        conn.close();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -140,7 +141,20 @@ public class PedidoDaoImpl implements PedidoDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-
+    @Override
+    public List<Pedido> selectProductos() throws SQLException{
+        List<Pedido> resp = new ArrayList<>();
+        Connection conn = template.getDataSource().getConnection();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT idPedido,fechaInicio,tipo,descripcion FROM Pedido");
+        while(rs.next()){
+            Pedido dept = new Pedido(rs.getInt(1), rs.getDate(2), rs.getString(3));
+            resp.add(dept);
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return resp;
+    }
     
 }

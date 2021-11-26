@@ -5,6 +5,7 @@
  */
 package uni.fiis.team.vizzlan.dao.pedidoDao;
 
+import java.sql.SQLException;
 import java.util.List;
 import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompra;
 import uni.fiis.team.vizzlan.domain.pedido.Envio;
@@ -25,6 +26,6 @@ public interface PedidoDao {
     public void registroEnvio(Integer cod,Envio env) throws Exception;
     public void relacionEnvioPedido(Integer cod, Envio env) throws Exception;
     public void registroDatosCliente (Integer cod,Integer cl) throws Exception;
-    
+    public List<Pedido> selectProductos() throws SQLException;
     
 }
