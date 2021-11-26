@@ -21,6 +21,10 @@ public class PedidoNormal extends Pedido{
     public PedidoNormal(Integer codigo, Date fechaPedido, String descripcion) {
         super(codigo, fechaPedido, descripcion);
     }
+
+    public PedidoNormal(Integer codigo, String descripcion) {
+        super(codigo, descripcion);
+    }
     
     
     

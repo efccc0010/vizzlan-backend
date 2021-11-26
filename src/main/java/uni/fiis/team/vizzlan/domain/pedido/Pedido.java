@@ -32,7 +32,10 @@ public class Pedido {
         this.fechaPedido = fechaPedido;
         this.descripcion = descripcion;
     }
-    
+    public Pedido(Integer codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+    }
     public Integer getCodigo() {
         return codigo;
     }

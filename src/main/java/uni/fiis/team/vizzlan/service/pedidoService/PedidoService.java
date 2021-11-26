@@ -16,7 +16,7 @@ import uni.fiis.team.vizzlan.domain.producto.Producto;
 public class PedidoService {
     
     @Autowired
-    PedidoDao pedidoDao;
+    private PedidoDao pedidoDao;
     
     public String realizarPedidoInicioService (PedidoNormal p) throws Exception{
         pedidoDao.registroPedidoInicio(p);

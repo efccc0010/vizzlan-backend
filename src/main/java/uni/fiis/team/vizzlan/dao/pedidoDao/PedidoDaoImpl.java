@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,9 @@ public class PedidoDaoImpl implements PedidoDao{
     private JdbcTemplate template;
 
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
-        try{
-            Connection conn = this.template.getDataSource().getConnection();
-            String sql = "INSERT INTO pedido(idPedido,tipo,descripcion) values(?,?,?)";
+       
+            Connection conn = template.getDataSource().getConnection();
+            String sql = "INSERT INTO pedido(idPedido,fechaInicio,descripcion) values(?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1,p.getCodigo());
             
@@ -41,16 +40,19 @@ public class PedidoDaoImpl implements PedidoDao{
             java.sql.Date sqlDate = new Date(utilDate.getTime()); 
             pst.setDate(2,sqlDate);*/
             
-            pst.setString(3,"PEDIDO ESTANDAR");
-            pst.setString(4,p.getDescripcion());
-            pst.execute();
+            /* pst.setString(2,"PEDIDO ESTANDAR");
+            pst.setString(3,p.getDescripcion());*/
+            String str = "2013-09-04";
+            Date dat = Date.valueOf(str);
+            
+            pst.setDate(2,dat);
+            pst.setString(3,p.getDescripcion());
+            /*pst.setInt(3,1);*/
+            
+            pst.executeUpdate();
             pst.close();
             conn.close();
-        }catch(SQLException e){
-            System.out.println(e.getErrorCode());;
-        }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       //To change body of generated methods, choose Tools | Templates.
     }
 
     public void registroProductoCompra(Integer sec,Integer cod,Producto pd) throws SQLException{

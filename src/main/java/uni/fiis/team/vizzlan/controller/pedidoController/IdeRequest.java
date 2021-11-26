@@ -5,30 +5,28 @@
  */
 package uni.fiis.team.vizzlan.controller.pedidoController;
 
-import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  *
  * @author chiri
  */
-class PedidoRequest {
-    private Integer codigo;
+class IdeRequest {
+    private Integer idTipoIdentificacion;
     private String descripcion;
-
-    public PedidoRequest(Integer codigo, String descripcion) {
-        this.codigo = codigo;
+            
+    public IdeRequest(Integer idTipoIdentificacion, String descripcion) {
+        this.idTipoIdentificacion = idTipoIdentificacion;
         this.descripcion = descripcion;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getIdTipoIdentificacion() {
+        return idTipoIdentificacion;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setIdTipoIdentificacion(Integer idTipoIdentificacion) {
+        this.idTipoIdentificacion = idTipoIdentificacion;
     }
-
-  
 
     public String getDescripcion() {
         return descripcion;
@@ -37,6 +35,5 @@ class PedidoRequest {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     
 }
