@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
+import uni.fiis.team.vizzlan.request.pedido.PedidoRequest;
 import uni.fiis.team.vizzlan.service.pedidoService.PedidoService;
+
 
 @RestController
 public class PedidoController {
@@ -32,7 +34,7 @@ public class PedidoController {
     }
     
     @PostMapping("/agregarlistaproductos")
-    public String seleccionarProductosCarriot(@RequestParam Integer cod,@RequestBody CarritoDeCompraRequest lpro) throws Exception{
+    public String seleccionarProductosCarrito(@RequestParam Integer cod,@RequestBody CarritoDeCompraRequest lpro) throws Exception{
         pedidoService.registrarCarritoCompraService(cod, lpro);
         return "ok";
     }
