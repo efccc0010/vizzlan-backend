@@ -5,7 +5,7 @@
  */
 package uni.fiis.team.vizzlan.controller.pedidoController;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -14,8 +14,9 @@ import java.util.Date;
 class PedidoRequest {
     private Integer codigo;
     private String descripcion;
+    private Date fechaPedido;
 
-    public PedidoRequest(Integer codigo, String descripcion) {
+    public PedidoRequest(Integer codigo,String fechaPedido, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
