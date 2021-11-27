@@ -144,7 +144,7 @@ public class PedidoDaoImpl implements PedidoDao{
         List<PedidoResponse> resp = new ArrayList<>();
         Connection conn = template.getDataSource().getConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idUsuario FROM Pedido");
+        ResultSet rs = st.executeQuery("SELECT idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario FROM Pedido");
         while(rs.next()){
             PedidoResponse dept = new PedidoResponse(
                     rs.getInt(1), 
