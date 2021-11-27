@@ -20,6 +20,7 @@ import uni.fiis.team.vizzlan.domain.pedido.Envio;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 
 @Repository
@@ -30,23 +31,18 @@ public class PedidoDaoImpl implements PedidoDao{
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
        
             Connection conn = template.getDataSource().getConnection();
-            String sql = "INSERT INTO pedido(idPedido,fechaInicio,descripcion) values(?,?,?)";
+            String sql = "INSERT INTO pedido(idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario) values(?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1,p.getCodigo());
+            pst.setDate(2,p.getFechaPedido());
+            pst.setString(3,p.getTipo());
+            pst.setString(4,p.getDescripcion());
+            pst.setString(5,"24 horas");
+            pst.setString(6,p.getEstadoPedido());
             
-            /*String lastCrawlDate = "2014-01-28";
-            java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(lastCrawlDate);
-            // because PreparedStatement#setDate(..) expects a Java.sql.Date argument
-            java.sql.Date sqlDate = new Date(utilDate.getTime()); 
-            pst.setDate(2,sqlDate);*/
+            Integer idCuentaUsuario = p.getComprador().getCodUsuario();
+            pst.setInt(7,idCuentaUsuario);
             
-            /* pst.setString(2,"PEDIDO ESTANDAR");
-            pst.setString(3,p.getDescripcion());*/
-            String str = "2013-09-04";
-            Date dat = Date.valueOf(str);
-            
-            pst.setDate(2,dat);
-            pst.setString(3,p.getDescripcion());
             /*pst.setInt(3,1);*/
             
             pst.executeUpdate();
@@ -144,13 +140,21 @@ public class PedidoDaoImpl implements PedidoDao{
     }
 
     @Override
-    public List<Pedido> selectProductos() throws SQLException{
-        List<Pedido> resp = new ArrayList<>();
+    public List<PedidoResponse> selectProductos() throws SQLException{
+        List<PedidoResponse> resp = new ArrayList<>();
         Connection conn = template.getDataSource().getConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT idPedido,fechaInicio,tipo,descripcion FROM Pedido");
+        ResultSet rs = st.executeQuery("SELECT idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idUsuario FROM Pedido");
         while(rs.next()){
-            Pedido dept = new Pedido(rs.getInt(1), rs.getDate(2), rs.getString(3));
+            PedidoResponse dept = new PedidoResponse(
+                    rs.getInt(1), 
+                    rs.getDate(2), 
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getInt(7)       
+            );
             resp.add(dept);
         }
         rs.close();

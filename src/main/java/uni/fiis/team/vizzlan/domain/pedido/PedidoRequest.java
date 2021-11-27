@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uni.fiis.team.vizzlan.request.Pedido;
+package uni.fiis.team.vizzlan.domain.pedido;
 
 import java.sql.Date;
-
 
 /**
  *
  * @author chiri
  */
-class PedidoRequest {
+public class PedidoRequest {
     private Integer codigo;
     private Date fechaPedido;
     private String tipo;
@@ -42,12 +41,12 @@ class PedidoRequest {
         this.codigo = codigo;
     }
 
-    public Date getFechaPedido() {
+    public java.sql.Date getFechaPedido() {
         return fechaPedido;
     }
 
-    public void setFechaPedido(Date fechaPedido) {
-        this.fechaPedido = fechaPedido;
+    public void setFechaPedido(String fechaPedido) {
+        this.fechaPedido = Date.valueOf(fechaPedido);
     }
 
     public String getTipo() {
@@ -97,11 +96,5 @@ class PedidoRequest {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
-    
-    
-    
-    
-
     
 }

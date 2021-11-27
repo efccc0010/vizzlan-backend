@@ -11,6 +11,7 @@ import uni.fiis.team.vizzlan.domain.pedido.Envio;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 @Service
 public class PedidoService {
@@ -50,7 +51,7 @@ public class PedidoService {
     }
     
     
-    public List<Pedido> mostrarProductos() throws SQLException{
+    public List<PedidoResponse> mostrarProductos() throws SQLException{
         return pedidoDao.selectProductos();
     }
 }

@@ -13,6 +13,7 @@ import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
 import uni.fiis.team.vizzlan.domain.persona.Usuario;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 /**
  *
@@ -26,6 +27,6 @@ public interface PedidoDao {
     public void registroEnvio(Integer cod,Envio env) throws Exception;
     public void relacionEnvioPedido(Integer cod, Envio env) throws Exception;
     public void registroDatosCliente (Integer cod,Integer cl) throws Exception;
-    public List<Pedido> selectProductos() throws SQLException;
+    public List<PedidoResponse> selectProductos() throws SQLException;
     
 }

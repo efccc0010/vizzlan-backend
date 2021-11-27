@@ -17,40 +17,16 @@ public class PedidoEspecial extends Pedido{
     private Double pagoInicial;
     private Double montoTotalPagado;
     private Double deuda;
-    public PedidoEspecial(Integer codigo, Date fechaPedido, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
-        super(codigo, fechaPedido, estadoPedido, descripcion, operador, comprador, envio, carroCompra);
+
+    public PedidoEspecial(Integer codigo, java.sql.Date fechaPedido, String tipo, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
+        super(codigo, fechaPedido, tipo, estadoPedido, descripcion, operador, comprador, envio, carroCompra);
     }
 
-    public Double getCostoAdicionalDecoracion() {
-        return costoAdicionalDecoracion;
+    public PedidoEspecial(Integer codigo, java.sql.Date fechaPedido, String tipo, String descripcion, String estadoPedido) {
+        super(codigo, fechaPedido, tipo, descripcion, estadoPedido);
     }
 
-    public void setCostoAdicionalDecoracion(Double costoAdicionalDecoracion) {
-        this.costoAdicionalDecoracion = costoAdicionalDecoracion;
-    }
 
-    public Double getPagoInicial() {
-        return pagoInicial;
-    }
-
-    public void setPagoInicial(Double pagoInicial) {
-        this.pagoInicial = pagoInicial;
-    }
-
-    public Double getMontoTotalPagado() {
-        return montoTotalPagado;
-    }
-
-    public void setMontoTotalPagado(Double montoTotalPagado) {
-        this.montoTotalPagado = montoTotalPagado;
-    }
-
-    public Double getDeuda() {
-        return deuda;
-    }
-
-    public void setDeuda(Double deuda) {
-        this.deuda = deuda;
-    }
+  
     
 }

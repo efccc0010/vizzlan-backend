@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
-import uni.fiis.team.vizzlan.request.pedido.PedidoRequest;
+import uni.fiis.team.vizzlan.domain.pedido.PedidoRequest;
+import uni.fiis.team.vizzlan.domain.persona.Usuario;
+//<editor-fold defaultstate="collapsed" desc="comment">
+
+//</editor-fold>
+import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 import uni.fiis.team.vizzlan.service.pedidoService.PedidoService;
 
 
@@ -28,18 +33,34 @@ public class PedidoController {
     
     @PostMapping("/crearinstanciapedido")
     public String crearInstanciaPedido(@RequestBody PedidoRequest pr) throws Exception{    
-        PedidoNormal p = new PedidoNormal(pr.getCodigo(),pr.getDescripcion());
+        PedidoNormal p = new PedidoNormal(
+                pr.getCodigo(),
+                pr.getFechaPedido(),
+                pr.getTipo(),
+                pr.getDescripcion(),
+                pr.getEstado()
+        );
+        
+        Usuario u = new Usuario(
+                pr.getIdCuentaUsuario(),
+                pr.getCuenta(),
+                pr.getContrasenia()
+        );
+        
+        p.setComprador(u);
+        
         String r = pedidoService.realizarPedidoInicioService(p);
         return "ok";
     }
     
-    @PostMapping("/agregarlistaproductos")
+    /*@PostMapping("/agregarlistaproductos")
     public String seleccionarProductosCarrito(@RequestParam Integer cod,@RequestBody CarritoDeCompraRequest lpro) throws Exception{
         pedidoService.registrarCarritoCompraService(cod, lpro);
         return "ok";
-    }
+    }*/
+    
     @GetMapping("/mostrar")
-    public List<Pedido> mostrarPedido() throws SQLException{
+    public List<PedidoResponse> mostrarPedido() throws SQLException{
         return pedidoService.mostrarProductos();
     }
     

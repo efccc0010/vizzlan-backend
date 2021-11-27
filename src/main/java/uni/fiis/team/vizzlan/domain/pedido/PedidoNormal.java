@@ -5,7 +5,7 @@
  */
 package uni.fiis.team.vizzlan.domain.pedido;
 
-import java.util.Date;
+import java.sql.Date;
 import uni.fiis.team.vizzlan.domain.persona.Usuario;
 
 /**
@@ -13,19 +13,14 @@ import uni.fiis.team.vizzlan.domain.persona.Usuario;
  * @author chiri
  */
 public class PedidoNormal extends Pedido{
-    
-    public PedidoNormal(Integer codigo, Date fechaPedido, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
-        super(codigo, fechaPedido, estadoPedido, descripcion, operador, comprador, envio, carroCompra);
+
+    public PedidoNormal(Integer codigo, java.sql.Date fechaPedido, String tipo, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
+        super(codigo, fechaPedido, tipo, estadoPedido, descripcion, operador, comprador, envio, carroCompra);
     }
 
-    public PedidoNormal(Integer codigo, Date fechaPedido, String descripcion) {
-        super(codigo, fechaPedido, descripcion);
+    public PedidoNormal(Integer codigo, java.sql.Date fechaPedido, String tipo, String descripcion, String estadoPedido) {
+        super(codigo, fechaPedido, tipo, descripcion, estadoPedido);
     }
 
-    public PedidoNormal(Integer codigo, String descripcion) {
-        super(codigo, descripcion);
-    }
-    
-    
     
 }

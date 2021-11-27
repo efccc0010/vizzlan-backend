@@ -1,24 +1,26 @@
 package uni.fiis.team.vizzlan.domain.pedido;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import uni.fiis.team.vizzlan.domain.persona.Usuario;
 
 public class Pedido {
     private Integer codigo ;
     private Date fechaPedido;
-    private String estadoPedido;
+    private String tipo;
     private String descripcion;
-    private String operador;
+    private String estadoPedido;
     private Usuario comprador;
+    private String operador;
     private Double montoTotal;
     private Envio envio;
     private CarritoDeCompra carroCompra;
 
-    public Pedido(Integer codigo, Date fechaPedido, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
+    public Pedido(Integer codigo, java.sql.Date fechaPedido,String tipo, String estadoPedido, String descripcion, String operador, Usuario comprador, Envio envio, CarritoDeCompra carroCompra) {
         this.codigo = codigo;
         this.fechaPedido = fechaPedido;
+        this.tipo=tipo;
         this.estadoPedido = estadoPedido;
         this.descripcion = descripcion;
         this.operador = operador;
@@ -27,15 +29,14 @@ public class Pedido {
         this.carroCompra = carroCompra;
     }
 
-    public Pedido(Integer codigo, Date fechaPedido, String descripcion) {
+    public Pedido(Integer codigo, java.sql.Date fechaPedido, String tipo, String descripcion, String estadoPedido) {
         this.codigo = codigo;
         this.fechaPedido = fechaPedido;
+        this.tipo = tipo;
         this.descripcion = descripcion;
+        this.estadoPedido = estadoPedido;
     }
-    public Pedido(Integer codigo, String descripcion) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-    }
+    
     public Integer getCodigo() {
         return codigo;
     }
@@ -48,16 +49,16 @@ public class Pedido {
         return fechaPedido;
     }
 
-    public void setFechaPedido(Date fechaPedido) {
+    public void setFechaPedido(java.sql.Date fechaPedido) {
         this.fechaPedido = fechaPedido;
     }
 
-    public String getEstadoPedido() {
-        return estadoPedido;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setEstadoPedido(String estadoPedido) {
-        this.estadoPedido = estadoPedido;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getDescripcion() {
@@ -66,6 +67,14 @@ public class Pedido {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEstadoPedido() {
+        return estadoPedido;
+    }
+
+    public void setEstadoPedido(String estadoPedido) {
+        this.estadoPedido = estadoPedido;
     }
 
     public String getOperador() {
@@ -108,8 +117,6 @@ public class Pedido {
         this.carroCompra = carroCompra;
     }
     
-   
- 
     
 
 }

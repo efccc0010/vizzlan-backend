@@ -33,6 +33,86 @@ public class Usuario {
         this.cuenta = cuenta;
         this.contrasenia = contrasenia;
     }
+
+    public Integer getCodPersona() {
+        return codPersona;
+    }
+
+    public void setCodPersona(Integer codPersona) {
+        this.codPersona = codPersona;
+    }
+
+    public Integer getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(Integer codUsuario) {
+        this.codUsuario = codUsuario;
+    }
+
+    public String getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public void setTipoIdentificacion(String tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getNombres() {
+        return Nombres;
+    }
+
+    public void setNombres(String Nombres) {
+        this.Nombres = Nombres;
+    }
+
+    public String getApellidos() {
+        return Apellidos;
+    }
+
+    public void setApellidos(String Apellidos) {
+        this.Apellidos = Apellidos;
+    }
+
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public String getTipoMecanismoContacto() {
+        return tipoMecanismoContacto;
+    }
+
+    public void setTipoMecanismoContacto(String tipoMecanismoContacto) {
+        this.tipoMecanismoContacto = tipoMecanismoContacto;
+    }
+
+    public String getMecanismoContacto() {
+        return mecanismoContacto;
+    }
+
+    public void setMecanismoContacto(String mecanismoContacto) {
+        this.mecanismoContacto = mecanismoContacto;
+    }
     
     
 }
