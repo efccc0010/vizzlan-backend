@@ -1,12 +1,15 @@
 package uni.fiis.team.vizzlan.domain.producto;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
 
 public class Producto {
     /** Atributos == Campos == Propiedades == Variables y constantes **/
     /* Variables de clase */
     /* Variables de instancia */
+
 
     private Integer codigoProducto;
     private String nombreProducto;
@@ -47,6 +50,12 @@ public class Producto {
         this.imagenReferencialProducto = imagenReferencialProducto;
         this.descripcionProducto = descripcionProducto;
         this.comentarioProducto = comentarioProducto;
+    }
+
+    public Producto(Integer codigoProducto,String nombreProducto,Date fechaIngreso){
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.fechaIngreso = fechaIngreso;
     }
     /* Métodos de clase */
     /* Métodos de instancia (objetos) */

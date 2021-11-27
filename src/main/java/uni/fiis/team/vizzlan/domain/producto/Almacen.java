@@ -1,5 +1,9 @@
 package uni.fiis.team.vizzlan.domain.producto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
 public class Almacen {
 
     private Integer codigoAlmacen;

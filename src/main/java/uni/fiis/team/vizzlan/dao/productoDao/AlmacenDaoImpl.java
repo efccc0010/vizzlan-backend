@@ -1,4 +1,4 @@
 package uni.fiis.team.vizzlan.dao.productoDao;
 
-public interface AlmacenDaoImpl {
+public class AlmacenDaoImpl {
 }
