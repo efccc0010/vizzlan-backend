@@ -44,26 +44,60 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public void RegistroCuenta(UsuarioRequest ur) throws Exception {
-
-    }
-
-    @Override
-    public void RelacionParteUsuario(Integer idParte, Integer idCuentasUsuarios) throws Exception {
-
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO cuentausuario VALUES(?,?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,ur.getIdCuentasUsuario());
+        pst.setString(2,ur.getCuenta());
+        pst.setString(3,ur.getContrasenia());
+        pst.setInt(4,ur.getIdParte());
+        pst.executeUpdate();
+        pst.close();
+        conn.close();
     }
 
     @Override
     public void RegistrarContacto(MecanismoDeContactoRequest mcr) throws Exception {
-
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO mecanismocontacto VALUES(?,?,?,?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,mcr.getIdMecanismoContacto());
+        pst.setDate(2,mcr.getFechaInicio());
+        pst.setDate(3,mcr.getFechaFin());
+        pst.setString(4,mcr.getDescripcion());
+        pst.setInt(5,mcr.getIdTipoMecanismoContacto());
+        pst.setInt(6,mcr.getIdParte());
+        pst.executeUpdate();
+        pst.close();
+        conn.close();
     }
 
     @Override
     public void RelacionParteContacto(Integer idParte, Integer idMecanismosContacto) throws Exception {
-
+        /*Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO parte VALUES(?,?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,idp);
+        pst.setString(2,tip);
+        pst.executeUpdate();
+        pst.close();
+        conn.close();
+        */
     }
 
     @Override
     public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception {
-
+        /*Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO mecanismocontacto VALUES(?,?,?,?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,mcr.getIdMecanismoContacto());
+        pst.setDate(2,mcr.getFechaInicio());
+        pst.setDate(3,mcr.getFechaFin());
+        pst.setString(4,mcr.getDescripcion());
+        pst.setInt(5,mcr.getIdTipoMecanismoContacto());
+        pst.setInt(6,mcr.getIdParte());
+        pst.executeUpdate();
+        pst.close();
+        conn.close();*/
     }
 }

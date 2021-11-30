@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import uni.fiis.team.vizzlan.dao.personaDao.PersonaRequest;
 import uni.fiis.team.vizzlan.dao.personaDao.UsuarioDao;
+import uni.fiis.team.vizzlan.dao.personaDao.UsuarioRequest;
 import uni.fiis.team.vizzlan.service.personaService.UsuarioService;
 
 @RestController
@@ -18,6 +19,10 @@ public class UsuarioController {
     public String RegistrarDatosPersonalesController(@RequestBody PersonaRequest personaRequest) throws Exception {
         return usuarioService.RegistrarDatosPersonalesService(personaRequest);
         
+    }
+    @PostMapping("/registrocuentausuario")
+    public String RegistroCuenta(@RequestBody UsuarioRequest usuarioRequest) throws Exception{
+        return usuarioService.RegistroCuenta(usuarioRequest);
     }
 
 }
