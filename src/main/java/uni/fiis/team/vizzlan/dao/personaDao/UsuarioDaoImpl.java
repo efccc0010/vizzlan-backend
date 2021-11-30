@@ -72,18 +72,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
         conn.close();
     }
 
-    @Override
-    public void RelacionParteContacto(Integer idParte, Integer idMecanismosContacto) throws Exception {
-        /*Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO parte VALUES(?,?)";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,idp);
-        pst.setString(2,tip);
-        pst.executeUpdate();
-        pst.close();
-        conn.close();
-        */
-    }
 
     @Override
     public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception {
