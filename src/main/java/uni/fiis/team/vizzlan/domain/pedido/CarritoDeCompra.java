@@ -8,6 +8,7 @@ package uni.fiis.team.vizzlan.domain.pedido;
 import java.util.ArrayList;
 import java.util.List;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
 
 /**
  *
@@ -15,15 +16,15 @@ import uni.fiis.team.vizzlan.domain.producto.Producto;
  */
 public class CarritoDeCompra {
      private Integer idUsuario;
-     private List<Producto> listaProd = new ArrayList<>();
      private Descuento descuento;
      private Float subTotal;
      private String estado;
+     private List<Producto> listaProd = new ArrayList<>();
 
-    public CarritoDeCompra(Integer idUsuario, Descuento descuento, Float SubTotal, String estado) {
+    public CarritoDeCompra(Integer idUsuario, Descuento descuento, Float subTotal, String estado) {
         this.idUsuario = idUsuario;
         this.descuento = descuento;
-        this.subTotal = SubTotal;
+        this.subTotal = subTotal;
         this.estado = estado;
     }
 
@@ -33,14 +34,6 @@ public class CarritoDeCompra {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public List<Producto> getListaProd() {
-        return listaProd;
-    }
-
-    public void setListaProd(List<Producto> listaProd) {
-        this.listaProd = listaProd;
     }
 
     public Descuento getDescuento() {
@@ -55,8 +48,8 @@ public class CarritoDeCompra {
         return subTotal;
     }
 
-    public void setSubTotal(Float SubTotal) {
-        this.subTotal = SubTotal;
+    public void setSubTotal(Float subTotal) {
+        this.subTotal = subTotal;
     }
 
     public String getEstado() {
@@ -66,11 +59,20 @@ public class CarritoDeCompra {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public List<Producto> getListaProd() {
+        return listaProd;
+    }
+
+    public void setListaProd(List<Producto> listaProd) {
+        this.listaProd = listaProd;
+    }
+
     
     public void calcularSubtotal(){
         Float s = 0.0f;
         for (Producto pd : this.listaProd){
-            s+=(float)pd.getCantidadProducto() * pd.getPrecioProducto();
+            s+=(float) pd.getCantidadProducto() * pd.getPrecioProducto() ;
         }
         this.subTotal = s; 
     }

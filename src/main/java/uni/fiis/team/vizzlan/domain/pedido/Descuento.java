@@ -12,14 +12,16 @@ package uni.fiis.team.vizzlan.domain.pedido;
 public class Descuento {
     private String idCupon;
     private String montoTotal;
-    private String costoTotalDescuento;
+    private Double costoTotalDescuento;
     private String tipoDescuento;
     private String porcentaje;
 
-    public Descuento(String idCupon, String montoTotal, String tipoDescuento) {
+    public Descuento(String idCupon, String montoTotal, Double costoTotalDescuento, String tipoDescuento, String porcentaje) {
         this.idCupon = idCupon;
         this.montoTotal = montoTotal;
+        this.costoTotalDescuento = costoTotalDescuento;
         this.tipoDescuento = tipoDescuento;
+        this.porcentaje = porcentaje;
     }
 
     public String getIdCupon() {
@@ -38,11 +40,11 @@ public class Descuento {
         this.montoTotal = montoTotal;
     }
 
-    public String getCostoTotalDescuento() {
+    public Double getCostoTotalDescuento() {
         return costoTotalDescuento;
     }
 
-    public void setCostoTotalDescuento(String costoTotalDescuento) {
+    public void setCostoTotalDescuento(Double costoTotalDescuento) {
         this.costoTotalDescuento = costoTotalDescuento;
     }
 
@@ -61,5 +63,6 @@ public class Descuento {
     public void setPorcentaje(String porcentaje) {
         this.porcentaje = porcentaje;
     }
+
     
 }

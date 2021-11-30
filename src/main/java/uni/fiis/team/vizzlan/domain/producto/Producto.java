@@ -7,7 +7,7 @@ public class Producto {
     /** Atributos == Campos == Propiedades == Variables y constantes **/
     /* Variables de clase */
     /* Variables de instancia */
-
+    private static Integer sec = 0;
     private Integer codigoProducto;
     private String nombreProducto;
     private String categoriaProducto;
@@ -47,10 +47,17 @@ public class Producto {
         this.imagenReferencialProducto = imagenReferencialProducto;
         this.descripcionProducto = descripcionProducto;
         this.comentarioProducto = comentarioProducto;
+        Producto.sec++;
     }
+
+    public static Integer getSec() {
+        return sec;
+    }
+    
+    
     /* Métodos de clase */
     /* Métodos de instancia (objetos) */
-
+    
     public Integer getCodigoProducto() {
         return codigoProducto;
     }

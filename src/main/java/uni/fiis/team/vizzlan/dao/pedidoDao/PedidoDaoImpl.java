@@ -17,9 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.pedido.Envio;
+import uni.fiis.team.vizzlan.domain.pedido.EnvioRequest;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 
@@ -51,37 +53,24 @@ public class PedidoDaoImpl implements PedidoDao{
        //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void registroProductoCompra(Integer sec,Integer cod,Producto pd) throws SQLException{
+    public void registroProductoCompra(Integer cod,ProductoRequest pd) throws SQLException{
         Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO articulos_pedido(SEC,idPedido,idProducto,cantidad,descripcion,precioU,precioTotal) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO articulos_pedido VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, sec);
-        pst.setInt(2, cod);
-        pst.setInt(3, pd.getCodigoProducto());
-        pst.setInt(4, pd.getCantidadProducto());
-        pst.setString(5,"---");
-        pst.setString(6,pd.getPrecioProducto().toString());
-        Float precioTotal = pd.getPrecioProducto()*(float)pd.getCantidadProducto();
-        pst.setString(7,precioTotal.toString());
+        pst.setInt(1,pd.getSEC());
+        pst.setInt(2,cod);
+        pst.setInt(3,pd.getIdProducto());
+        pst.setInt(4,pd.getIdTipoCaracteristicasProducto());
+        pst.setInt(5,pd.getCantidad());
+        pst.setString(6, pd.getDescripcion());
+        pst.setString(7, pd.getPrecioUnitario().toString());
+        pst.setString(8,pd.getPrecioTotal().toString());
+        pst.setString(9, pd.getTerminosCondiciones());
         pst.executeUpdate();
         pst.close();
         conn.close();
-        
     }
-        /*List<Producto> lista = new ArrayList<>();
-        lista = cdp.getListaProd();
-        int sec = 0;
         
-        for(Producto pd :lista){
-            /*private Integer idUsuario;
-             private List<Producto> listaProd = new ArrayList<>();
-             private Descuento descuento;
-             private Double subTotal;
-             private String estado;
-            this.registroProductoCompra(sec, cod, pd);
-            sec++;
-        }
-        */
     public void registroMontoTotal(Integer cod,Float montoSub) throws Exception{
         Connection conn =  template.getDataSource().getConnection();
         String sql = "UPDATE pedido SET montoTotal= ? WHERE idPedido = ?";
@@ -94,36 +83,36 @@ public class PedidoDaoImpl implements PedidoDao{
     }  
     
     @Override
-    public void registroEnvio(Integer cod,Envio env) throws Exception {
+    public void registroEnvio(EnvioRequest env) throws Exception {
         Connection conn = this.template.getDataSource().getConnection();
-        String sql = "INSERT INTO envio(idEnvio,tipoEnvio,direccion,tipoMedio,estadoEnvio,medioTransporte) values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO envio VALUES(?,?,?,?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1,env.getIdEnvio());
-        pst.setString(2,"envio de productos estandar");
-        pst.setString(3,env.getDireccionEnvio());
-        pst.setString(4,env.getTipoTransporte());
-        pst.setString(4,env.getEstadoEnvio());
-        pst.setString(6,env.getNombreTransporte());
+        pst.setString(2,env.getTipoEnvio());
+        pst.setString(3,env.getDireccion());
+        pst.setFloat(4,env.getCosto());
+        pst.setString(5,env.getEstimacionEntrega());
+        pst.setString(6,env.getMedioTransporte());
+        pst.setString(7,env.getTipoMedio());
+        pst.setString(8,env.getEstadoEnvio());
+        pst.setString(9,env.getTerminosEnvio());
         pst.executeUpdate();
         pst.close();
         conn.close();
-        /*private Integer idEnvio;
-        private String direccionEnvio;
-        private String tipoTransporte; 
-        private String estadoEnvio;
-        private String nombreTransporte;*/
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("no lo soporta"); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void relacionEnvioPedido(Integer cod, Envio env) throws Exception{
-        Connection conn = this.template.getDataSource().getConnection();
-        String sql = "UPDATE pedido SET idEnvio= ? WHERE idPedido = ?";
+    @Override
+    public void relacionEnvioPedido(Integer cod, EnvioRequest env) throws Exception{
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "UPDATE pedido SET idEnvio = ? WHERE idPedido = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1,env.getIdEnvio());
-        pst.setInt(2,cod);
+        pst.setInt(2,env.getIdPedido());
         pst.executeUpdate();
         pst.close();
         conn.close(); 
+        throw new UnsupportedOperationException("no lo soporta la relacion");
     }
     
     @Override

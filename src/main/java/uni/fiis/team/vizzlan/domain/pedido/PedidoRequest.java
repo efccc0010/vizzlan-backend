@@ -12,6 +12,7 @@ import java.sql.Date;
  * @author chiri
  */
 public class PedidoRequest {
+    private Integer sec;
     private Integer codigo;
     private Date fechaPedido;
     private String tipo;
@@ -22,9 +23,10 @@ public class PedidoRequest {
     private String cuenta;
     private String contrasenia;
 
-    public PedidoRequest(Integer codigo, String fechaPedido, String tipo, String descripcion, String estado, Integer idCuentaUsuario, String cuenta, String contrasenia) {
+    public PedidoRequest(Integer sec, Integer codigo, Date fechaPedido, String tipo, String descripcion, String estado, Integer idCuentaUsuario, String cuenta, String contrasenia) {
+        this.sec = sec;
         this.codigo = codigo;
-        this.fechaPedido = Date.valueOf(fechaPedido);
+        this.fechaPedido = fechaPedido;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.estado = estado;
@@ -32,6 +34,20 @@ public class PedidoRequest {
         this.cuenta = cuenta;
         this.contrasenia = contrasenia;
     }
+
+    public Integer getSec() {
+        return sec;
+    }
+
+    public void setSec(Integer sec) {
+        this.sec = sec;
+    }
+
+    public void setFechaPedido(Date fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    
 
     public Integer getCodigo() {
         return codigo;

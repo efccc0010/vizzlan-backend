@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.fiis.team.vizzlan.dao.pedidoDao.PedidoDao;
 import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompra;
+import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompraRequest;
 import uni.fiis.team.vizzlan.domain.pedido.Envio;
+import uni.fiis.team.vizzlan.domain.pedido.EnvioRequest;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
-import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 @Service
@@ -24,23 +26,21 @@ public class PedidoService {
         return "registro de pedido";
     }
     
-    public String registrarCarritoCompraService (Integer cod,CarritoDeCompra cdp)throws Exception{
-        List<Producto> lista = new ArrayList<>();
-        lista = cdp.getListaProd();
-        int sec = 0;
-        
-        for(Producto pd :lista){
-            
-            pedidoDao.registroProductoCompra(sec,cod, pd);
-            sec++;
+    public String registrarCarritoCompraService (CarritoDeCompraRequest cdp)throws Exception{
+        List<ProductoRequest> listaProductos = new ArrayList<>(); 
+        listaProductos = cdp.getListaProd();
+        float s = 0.0f;
+        for (ProductoRequest p: listaProductos ){
+            pedidoDao.registroProductoCompra(cdp.getCodPedido(),p);
+            s += p.getPrecioTotal();
         }
         
-        pedidoDao.registroMontoTotal(cod, cdp.getSubTotal());
-        return "Registro de los Productos Guardados";
+        pedidoDao.registroMontoTotal(cdp.getCodPedido(), s);
+        return "ok";
     }
     
-    public String registroEnvioService(Integer cod,Envio env) throws Exception{
-        pedidoDao.registroEnvio(cod, env);
+    public String registroEnvioService(Integer cod,EnvioRequest env) throws Exception{
+        pedidoDao.registroEnvio(env);
         pedidoDao.relacionEnvioPedido(cod, env);
         return "registro de envio dado";
     }
