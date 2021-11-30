@@ -75,17 +75,16 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception {
-        /*Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO mecanismocontacto VALUES(?,?,?,?,?,?)";
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO personaidentificacion VALUES(?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,mcr.getIdMecanismoContacto());
-        pst.setDate(2,mcr.getFechaInicio());
-        pst.setDate(3,mcr.getFechaFin());
-        pst.setString(4,mcr.getDescripcion());
-        pst.setInt(5,mcr.getIdTipoMecanismoContacto());
-        pst.setInt(6,mcr.getIdParte());
+        pst.setDate(1,ir.getFechaInicio());
+        pst.setDate(2,ir.getFechaFin());
+        pst.setString(3,ir.getDescripcion());
+        pst.setInt(4,ir.getIdTipoIdentificacion());
+        pst.setInt(5,ir.getIdParte());
         pst.executeUpdate();
         pst.close();
-        conn.close();*/
+        conn.close();
     }
 }

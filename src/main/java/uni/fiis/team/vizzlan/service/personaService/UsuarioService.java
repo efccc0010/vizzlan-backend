@@ -2,10 +2,7 @@ package uni.fiis.team.vizzlan.service.personaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uni.fiis.team.vizzlan.dao.personaDao.MecanismoDeContactoRequest;
-import uni.fiis.team.vizzlan.dao.personaDao.PersonaRequest;
-import uni.fiis.team.vizzlan.dao.personaDao.UsuarioDao;
-import uni.fiis.team.vizzlan.dao.personaDao.UsuarioRequest;
+import uni.fiis.team.vizzlan.dao.personaDao.*;
 
 import java.util.List;
 
@@ -32,5 +29,12 @@ public class UsuarioService {
             usuarioDao.RegistrarContacto(mcr);
         }
         return  "Registro de mecanismo completado correctamente";
+    }
+
+    public String RegistroIdentificacion(List<IdentificacionRequest> identificacionRequests) throws Exception{
+        for (IdentificacionRequest ir:identificacionRequests){
+            usuarioDao.RegistroIdentificacion(ir);
+        }
+        return "Registro de identificacion completado correctamente";
     }
 }
