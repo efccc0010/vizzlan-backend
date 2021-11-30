@@ -67,6 +67,7 @@ public class PedidoController {
     }
     
     
+    
     @GetMapping("/mostrar")
     public List<PedidoResponse> mostrarPedido() throws SQLException{
         return pedidoService.mostrarProductos();

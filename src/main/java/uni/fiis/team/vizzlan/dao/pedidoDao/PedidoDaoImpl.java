@@ -117,7 +117,7 @@ public class PedidoDaoImpl implements PedidoDao{
     }
     
     @Override
-    public void registroDatosCliente(Integer cod, Integer cl) throws Exception {
+    public void registroDatosCliente(Integer cod, Integer cl) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
         String sql = "UPDATE pedido SET idCuentasUsuario = ? WHERE idPedido = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class PedidoDaoImpl implements PedidoDao{
         pst.executeUpdate();
         pst.close();
         conn.close();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
