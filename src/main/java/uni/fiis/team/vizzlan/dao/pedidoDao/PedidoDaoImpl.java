@@ -33,7 +33,7 @@ public class PedidoDaoImpl implements PedidoDao{
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
        
             Connection conn = template.getDataSource().getConnection();
-            String sql = "INSERT INTO pedido(idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario) values(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO pedido(idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario,idEnvio) values(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1,p.getCodigo());
             pst.setDate(2,p.getFechaPedido());
@@ -44,6 +44,7 @@ public class PedidoDaoImpl implements PedidoDao{
             
             Integer idCuentaUsuario = p.getComprador().getCodUsuario();
             pst.setInt(7,idCuentaUsuario);
+            pst.setInt(8,0);
             
             /*pst.setInt(3,1);*/
             
@@ -83,14 +84,14 @@ public class PedidoDaoImpl implements PedidoDao{
     }  
     
     @Override
-    public void registroEnvio(EnvioRequest env) throws Exception {
-        Connection conn = this.template.getDataSource().getConnection();
+    public void registroEnvio(EnvioRequest env) throws SQLException {
+        Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO envio VALUES(?,?,?,?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1,env.getIdEnvio());
         pst.setString(2,env.getTipoEnvio());
         pst.setString(3,env.getDireccion());
-        pst.setFloat(4,env.getCosto());
+        pst.setDouble(4,env.getCosto());
         pst.setString(5,env.getEstimacionEntrega());
         pst.setString(6,env.getMedioTransporte());
         pst.setString(7,env.getTipoMedio());
@@ -99,20 +100,20 @@ public class PedidoDaoImpl implements PedidoDao{
         pst.executeUpdate();
         pst.close();
         conn.close();
-        throw new UnsupportedOperationException("no lo soporta"); //To change body of generated methods, choose Tools | Templates.
+       //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
-    public void relacionEnvioPedido(Integer cod, EnvioRequest env) throws Exception{
+    public void relacionEnvioPedido(Integer cod, EnvioRequest env) throws SQLException{
         Connection conn = template.getDataSource().getConnection();
         String sql = "UPDATE pedido SET idEnvio = ? WHERE idPedido = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,env.getIdEnvio());
+        pst.setInt(1,cod);
         pst.setInt(2,env.getIdPedido());
         pst.executeUpdate();
         pst.close();
         conn.close(); 
-        throw new UnsupportedOperationException("no lo soporta la relacion");
+        
     }
     
     @Override

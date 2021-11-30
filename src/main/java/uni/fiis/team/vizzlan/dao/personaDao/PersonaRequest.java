@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class PersonaRequest {
      private Integer idParte;
-     private String     tipo;
-     private String  nombre;
-     private String  apellido;
-     private java.sql.Date  fechaNacimiento;
+     private String tipo;
+     private String nombre;
+     private String apellido;
+     private Date fechaNacimiento;
      private Integer edad;
-     private String   genero;
+     private String genero;
 
     public PersonaRequest(Integer idParte, String tipo, String nombre, String apellido, Date fechaNacimiento, Integer edad, String genero) {
         this.idParte = idParte;
@@ -21,6 +21,13 @@ public class PersonaRequest {
         this.genero = genero;
     }
 
+    public Integer getIdParte() {
+        return idParte;
+    }
+
+    public void setIdParte(Integer idParte) {
+        this.idParte = idParte;
+    }
 
     public String getTipo() {
         return tipo;
@@ -28,14 +35,6 @@ public class PersonaRequest {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Integer getIdParte() {
-        return idParte;
-    }
-
-    public void setIdParte(Integer idParte) {
-        this.idParte = idParte;
     }
 
     public String getNombre() {
@@ -54,12 +53,12 @@ public class PersonaRequest {
         this.apellido = apellido;
     }
 
-    public java.sql.Date getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = Date.valueOf(fechaNacimiento);
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Integer getEdad() {
@@ -77,4 +76,7 @@ public class PersonaRequest {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+
+     
+     
 }

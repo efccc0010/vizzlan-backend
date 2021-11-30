@@ -10,7 +10,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioDao usuarioDao;
-    public String RegistrarDatosPersonales(PersonaRequest personaRequest) throws Exception {
+    
+   
+    public String RegistrarDatosPersonalesService(PersonaRequest personaRequest) throws Exception {
         usuarioDao.RegistrarTipoParte(personaRequest.getIdParte(), personaRequest.getTipo());
         usuarioDao.RegistrarDatosPersonales(personaRequest);
         return "Registro de datos personales completado correctamente";

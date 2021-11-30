@@ -21,6 +21,7 @@ public class PedidoService {
     @Autowired
     private PedidoDao pedidoDao;
     
+    
     public String realizarPedidoInicioService (PedidoNormal p) throws Exception{
         pedidoDao.registroPedidoInicio(p);
         return "registro de pedido";
@@ -49,7 +50,6 @@ public class PedidoService {
         pedidoDao.registroDatosCliente(cod, cl);
         return "registro de clientes";
     }
-    
     
     public List<PedidoResponse> mostrarProductos() throws SQLException{
         return pedidoDao.selectProductos();

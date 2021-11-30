@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -14,21 +15,21 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private JdbcTemplate template;
 
     @Override
-    public void RegistrarTipoParte(Integer idParte, String tipo) throws Exception {
+    public void RegistrarTipoParte(Integer idp, String tip) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO PARTE VALUES (?,?)";
+        String sql = "INSERT INTO parte VALUES(?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,idParte);
-        pst.setString(2,tipo);
+        pst.setInt(1,idp);
+        pst.setString(2,tip);
         pst.executeUpdate();
         pst.close();
         conn.close();
     }
 
     @Override
-    public void RegistrarDatosPersonales(PersonaRequest pr) throws Exception {
+    public void RegistrarDatosPersonales(PersonaRequest pr) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO PERSONAS VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO personas VALUES(?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1,pr.getIdParte());
         pst.setString(2,pr.getNombre());
