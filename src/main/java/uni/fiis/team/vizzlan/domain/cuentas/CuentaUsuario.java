@@ -21,6 +21,11 @@ public class CuentaUsuario {
         this.correoCuentaUsuario = correoCuentaUsuario;
     }
 
+    public CuentaUsuario(String nicknameCuentaUsuario, String contraseniaCuentaUsuario){
+        this.nicknameCuentaUsuario = nicknameCuentaUsuario;
+        this.contraseniaCuentaUsuario = contraseniaCuentaUsuario;
+    }
+
     public String getNicknameCuentaUsuario() {
         return nicknameCuentaUsuario;
     }

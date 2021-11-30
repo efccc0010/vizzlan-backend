@@ -1,4 +1,4 @@
 package uni.fiis.team.vizzlan.service.productoService;
 
-public interface MaterialDecoradoServiceImpl {
+public class MaterialDecoradoServiceImpl {
 }

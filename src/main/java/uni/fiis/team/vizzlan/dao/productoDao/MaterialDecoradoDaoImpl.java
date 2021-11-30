@@ -1,4 +1,4 @@
 package uni.fiis.team.vizzlan.dao.productoDao;
 
-public class DisenioProductoDaoImpl {
+public class MaterialDecoradoDaoImpl {
 }

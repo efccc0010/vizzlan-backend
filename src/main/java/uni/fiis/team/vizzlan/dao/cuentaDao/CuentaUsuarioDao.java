@@ -1,4 +1,10 @@
 package uni.fiis.team.vizzlan.dao.cuentaDao;
 
-public class CuentaUsuarioDao {
+import uni.fiis.team.vizzlan.domain.cuentas.CuentaUsuario;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public interface CuentaUsuarioDao {
+    List<CuentaUsuario> seleccionarCuentaUsuario() throws SQLException;
 }
