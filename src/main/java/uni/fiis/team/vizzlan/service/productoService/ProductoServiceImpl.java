@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.fiis.team.vizzlan.dao.productoDao.ProductoDao;
 import uni.fiis.team.vizzlan.domain.producto.CaracteristicaAplicadoProductoResponse;
+import uni.fiis.team.vizzlan.domain.producto.CategoriaProductoResponse;
 import uni.fiis.team.vizzlan.domain.producto.CategoriaProductosRequest;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
 
@@ -36,5 +37,14 @@ public class ProductoServiceImpl implements ProductoService{
         return productoDao.obtenerCaracteristicasProductos();
     }
 
+    @Override
+    public List<CategoriaProductoResponse> encontrarCategorias() throws SQLException {
+        return productoDao.obtenerTodasCategorias();
+    }
+
+    @Override
+    public List<CategoriaProductosRequest> filtrarProductos(Integer idCategoria) throws Exception {
+        return productoDao.filtrarProductoPorCategoria(idCategoria);
+    }
 
 }
