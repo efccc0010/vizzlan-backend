@@ -12,6 +12,7 @@ import uni.fiis.team.vizzlan.domain.pedido.Envio;
 import uni.fiis.team.vizzlan.domain.pedido.EnvioRequest;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
+import uni.fiis.team.vizzlan.domain.persona.Usuario;
 import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
@@ -24,6 +25,8 @@ public class PedidoService {
     
     public String realizarPedidoInicioService (PedidoNormal p) throws Exception{
         pedidoDao.registroPedidoInicio(p);
+        Usuario u = p.getComprador();
+        pedidoDao.registroDatosCliente(p.getCodigo(),u.getCodUsuario());
         return "registro de pedido";
     }
     
@@ -54,4 +57,5 @@ public class PedidoService {
     public List<PedidoResponse> mostrarProductos() throws SQLException{
         return pedidoDao.selectProductos();
     }
+
 }
