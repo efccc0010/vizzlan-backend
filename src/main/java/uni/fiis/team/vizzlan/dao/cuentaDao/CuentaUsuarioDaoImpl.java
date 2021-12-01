@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.cuentas.CuentaUsuario;
+import uni.fiis.team.vizzlan.domain.persona.Usuario;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -34,4 +35,5 @@ public class CuentaUsuarioDaoImpl implements CuentaUsuarioDao{
         conn.close();
         return cuentaUsuarios;
     }
+
 }
