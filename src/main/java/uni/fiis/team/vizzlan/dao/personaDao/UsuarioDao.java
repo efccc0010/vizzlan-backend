@@ -1,7 +1,6 @@
 package uni.fiis.team.vizzlan.dao.personaDao;
 
 import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
-import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 import java.sql.SQLException;
 import java.util.List;
