@@ -1,10 +1,12 @@
 package uni.fiis.team.vizzlan.controller.personaController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import uni.fiis.team.vizzlan.dao.personaDao.*;
+import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
 import uni.fiis.team.vizzlan.service.personaService.UsuarioService;
 
 import java.util.List;
@@ -31,6 +33,10 @@ public class UsuarioController {
     @PostMapping("/registroidentificacion")
     public String RegistroIdentificacion(@RequestBody List<IdentificacionRequest> identificacionRequests) throws Exception{
         return usuarioService.RegistroIdentificacion(identificacionRequests);
+    }
+    @GetMapping("/mostrarlistausuario")
+    public List<ParteResponse> mostrarUsuario()throws Exception{
+        return usuarioService.mostrarParte();
     }
 
 }

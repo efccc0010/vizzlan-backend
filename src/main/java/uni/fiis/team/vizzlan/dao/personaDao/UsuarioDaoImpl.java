@@ -3,10 +3,12 @@ package uni.fiis.team.vizzlan.dao.personaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
+import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -86,5 +88,53 @@ public class UsuarioDaoImpl implements UsuarioDao {
         pst.executeUpdate();
         pst.close();
         conn.close();
+    }
+
+    @Override
+    public List<ParteResponse> selectParte() throws SQLException{
+        List<ParteResponse> resp = new ArrayList<>();
+        Connection conn = template.getDataSource().getConnection();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT  p.nombre, \n" +
+                "\t\tp.apellido, \n" +
+                "\t\tp.fechaNacimiento, \n" +
+                "\t\tp.edad, \n" +
+                "\t\tp.genero, \n" +
+                "        pa.tipo,\n" +
+                "        cu.cuenta,\n" +
+                "        mc.descripcion as correo,\n" +
+                "        pi.descripcion as dni\n" +
+                "FROM personas as p \n" +
+                "INNER JOIN parte as pa \n" +
+                "\tON pa.idParte = p.idParte\n" +
+                "INNER JOIN cuentausuario as cu \n" +
+                "\tON cu.idParte = p.idParte\n" +
+                "INNER JOIN mecanismocontacto as mc \n" +
+                "\tON mc.idParte = pa.idParte\n" +
+                "INNER JOIN tipomecanismocontacto as tmc \n" +
+                "\tON tmc.idTipoMecanismoContacto = mc.idTipoMecanismoContacto\n" +
+                "INNER JOIN personaidentificacion as pi\n" +
+                "\tON pi.idParte = p.idParte\n" +
+                "INNER JOIN tipoidentificacion as ti \n" +
+                "\tON ti.idTipoIdentificacion = pi.idTipoIdentificacion\n" +
+                "WHERE tmc.descripcion = \"GMAIL\" and ti.descripcion = \"DNI\"");
+        while(rs.next()){
+            ParteResponse dept = new ParteResponse(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getDate(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9)
+            );
+            resp.add(dept);
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return resp;
     }
 }

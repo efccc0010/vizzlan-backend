@@ -3,7 +3,9 @@ package uni.fiis.team.vizzlan.service.personaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.fiis.team.vizzlan.dao.personaDao.*;
+import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -37,4 +39,9 @@ public class UsuarioService {
         }
         return "Registro de identificacion completado correctamente";
     }
+
+    public List<ParteResponse> mostrarParte() throws Exception{
+        return usuarioDao.selectParte();
+    }
+
 }
