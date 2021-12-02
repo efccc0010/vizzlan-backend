@@ -11,12 +11,10 @@ public class PersonaRequest {
      private Integer edad;
      private String genero;
 
-    public PersonaRequest(Integer idParte, String tipo, String nombre, String apellido, Date fechaNacimiento, Integer edad, String genero) {
-        this.idParte = idParte;
+    public PersonaRequest(String tipo, String nombre, String apellido, Integer edad, String genero) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
         this.edad = edad;
         this.genero = genero;
     }

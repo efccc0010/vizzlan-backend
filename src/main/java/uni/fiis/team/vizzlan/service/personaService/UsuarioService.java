@@ -10,6 +10,7 @@ import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
 import uni.fiis.team.vizzlan.response.personas.ParteResponse;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,24 +18,31 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioDao usuarioDao;
-
+    
+    private Integer codParte;
+    private Integer codUsuario;
    
-    public String RegistrarDatosPersonalesService(PersonaRequest personaRequest) throws Exception {
-        usuarioDao.RegistrarTipoParte(personaRequest.getIdParte(), personaRequest.getTipo());
-        usuarioDao.RegistrarDatosPersonales(personaRequest);
-        return "Registro de datos personales completado correctamente";
+    public PersonaRequest RegistrarDatosPersonalesService(PersonaRequest personaRequest) throws Exception {
+        this.codParte = usuarioDao.RegistrarTipoParte(personaRequest);
+        personaRequest.setIdParte(this.codParte);
+        return personaRequest;
     }
 
-    public String RegistroCuenta(UsuarioRequest usuarioRequest) throws Exception{
-        usuarioDao.RegistroCuenta(usuarioRequest);
-        return  "Registro de cuenta completado correctamente";
+    public UsuarioRequest RegistroCuenta(UsuarioRequest usuarioRequest) throws Exception{
+        usuarioRequest.setIdParte(this.codParte);
+        this.codUsuario = usuarioDao.RegistroCuenta(usuarioRequest);
+        usuarioRequest.setIdCuentasUsuario(this.codUsuario);
+        return usuarioRequest;
     }
 
-    public String RegistrarContacto(List<MecanismoDeContactoRequest> mecanismoDeContactoRequest) throws Exception{
+    public List<MecanismoDeContactoRequest> RegistrarContacto(List<MecanismoDeContactoRequest> mecanismoDeContactoRequest) throws Exception{
+        List<MecanismoDeContactoRequest> mdcr = new ArrayList<>();
         for (MecanismoDeContactoRequest mcr:mecanismoDeContactoRequest){
-            usuarioDao.RegistrarContacto(mcr);
+            Integer codMecanismo = usuarioDao.RegistrarContacto(mcr);
+            mcr.setIdMecanismoContacto(codMecanismo);
+            mdcr.add(mcr);
         }
-        return  "Registro de mecanismo completado correctamente";
+        return  mdcr;
     }
 
     public String RegistroIdentificacion(List<IdentificacionRequest> identificacionRequests) throws Exception{

@@ -7,8 +7,7 @@ public class UsuarioRequest {
    private String contrasenia;
    private Integer idParte;
 
-    public UsuarioRequest(Integer idCuentasUsuario, String cuenta, String contrasenia, Integer idParte) {
-        this.idCuentasUsuario = idCuentasUsuario;
+    public UsuarioRequest(String cuenta, String contrasenia, Integer idParte) {
         this.cuenta = cuenta;
         this.contrasenia = contrasenia;
         this.idParte = idParte;
