@@ -8,7 +8,7 @@ package uni.fiis.team.vizzlan.domain.pedido;
 import java.util.ArrayList;
 import java.util.List;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
-import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
+import uni.fiis.team.vizzlan.request.producto.ProductoRequest;
 
 /**
  *

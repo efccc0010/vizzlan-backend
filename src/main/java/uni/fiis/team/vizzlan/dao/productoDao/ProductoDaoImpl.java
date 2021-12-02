@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.producto.*;
+import uni.fiis.team.vizzlan.request.producto.CaracteristicasProductosRequest;
+import uni.fiis.team.vizzlan.request.producto.CategoriaProductosRequest;
+import uni.fiis.team.vizzlan.response.producto.CaracteristicaAplicadoProductoResponse;
+import uni.fiis.team.vizzlan.response.producto.CategoriaProductoResponse;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -2,10 +2,11 @@ package uni.fiis.team.vizzlan.controller.productoController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uni.fiis.team.vizzlan.domain.producto.CaracteristicaAplicadoProductoResponse;
-import uni.fiis.team.vizzlan.domain.producto.CategoriaProductoResponse;
-import uni.fiis.team.vizzlan.domain.producto.CategoriaProductosRequest;
+
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.request.producto.CategoriaProductosRequest;
+import uni.fiis.team.vizzlan.response.producto.CaracteristicaAplicadoProductoResponse;
+import uni.fiis.team.vizzlan.response.producto.CategoriaProductoResponse;
 import uni.fiis.team.vizzlan.service.productoService.ProductoService;
 
 import java.sql.SQLException;

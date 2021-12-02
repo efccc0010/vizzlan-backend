@@ -3,8 +3,13 @@ package uni.fiis.team.vizzlan.dao.personaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
+
+import uni.fiis.team.vizzlan.request.personas.IdentificacionRequest;
+import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
+import uni.fiis.team.vizzlan.request.personas.PersonaRequest;
+import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
+import uni.fiis.team.vizzlan.response.personas.ParteResponse;
 
 import java.sql.*;
 import java.util.ArrayList;

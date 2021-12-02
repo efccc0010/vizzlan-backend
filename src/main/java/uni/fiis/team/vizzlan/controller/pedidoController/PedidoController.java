@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompra;
-import uni.fiis.team.vizzlan.domain.pedido.CarritoDeCompraRequest;
-import uni.fiis.team.vizzlan.domain.pedido.EnvioRequest;
 import uni.fiis.team.vizzlan.domain.pedido.Pedido;
 import uni.fiis.team.vizzlan.domain.pedido.PedidoNormal;
-import uni.fiis.team.vizzlan.domain.pedido.PedidoRequest;
 import uni.fiis.team.vizzlan.domain.persona.Usuario;
 //<editor-fold defaultstate="collapsed" desc="comment">
-
+import uni.fiis.team.vizzlan.request.pedido.CarritoDeCompraRequest;
+import uni.fiis.team.vizzlan.request.pedido.EnvioRequest;
+import uni.fiis.team.vizzlan.request.pedido.PedidoRequest;
 //</editor-fold>
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 import uni.fiis.team.vizzlan.service.pedidoService.PedidoService;

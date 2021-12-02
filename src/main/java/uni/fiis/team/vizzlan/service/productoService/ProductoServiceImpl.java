@@ -3,10 +3,10 @@ package uni.fiis.team.vizzlan.service.productoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.fiis.team.vizzlan.dao.productoDao.ProductoDao;
-import uni.fiis.team.vizzlan.domain.producto.CaracteristicaAplicadoProductoResponse;
-import uni.fiis.team.vizzlan.domain.producto.CategoriaProductoResponse;
-import uni.fiis.team.vizzlan.domain.producto.CategoriaProductosRequest;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
+import uni.fiis.team.vizzlan.request.producto.CategoriaProductosRequest;
+import uni.fiis.team.vizzlan.response.producto.CaracteristicaAplicadoProductoResponse;
+import uni.fiis.team.vizzlan.response.producto.CategoriaProductoResponse;
 
 import java.sql.SQLException;
 import java.util.List;

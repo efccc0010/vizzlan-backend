@@ -11,7 +11,9 @@ import java.util.List;
 import uni.fiis.team.vizzlan.domain.pedido.*;
 import uni.fiis.team.vizzlan.domain.persona.Usuario;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
-import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
+import uni.fiis.team.vizzlan.request.pedido.EnvioRequest;
+import uni.fiis.team.vizzlan.request.producto.ProductoRequest;
+import uni.fiis.team.vizzlan.response.pedido.DescuentoResponse;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 /**
@@ -22,7 +24,7 @@ public interface PedidoDao {
     public void registroPedidoInicio(PedidoNormal p)throws Exception;
     //public void registroDetalleCarritoCompra(Integer cod,CarritoDeCompra cdp) throws Exception;
     public void registroProductoCompra(Integer cod,ProductoRequest pd) throws SQLException;
-    public void registroMontoTotal(Integer cod,Float cdp)throws Exception;
+    public void registroMontoTotal(Integer cod,Float cdp,Float desc)throws Exception;
     public DescuentoResponse buscarDescuento(Integer idProducto, String Descuento) throws Exception;
     public void registroEnvio(EnvioRequest env) throws Exception;
     public void relacionEnvioPedido(Integer cod, EnvioRequest env) throws Exception;
