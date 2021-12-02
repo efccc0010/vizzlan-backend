@@ -3,18 +3,28 @@ package uni.fiis.team.vizzlan.dao.personaDao;
 import java.sql.Date;
 
 public class IdentificacionRequest {
+    private Integer idPersonaIdentificacion;
     private Date fechaInicio;
     private Date fechaFin;
     private String descripcion;
     private Integer idTipoIdentificacion;
     private Integer idParte;
 
-    public IdentificacionRequest(Date fechaInicio, Date fechaFin, String descripcion, Integer idTipoIdentificacion, Integer idParte) {
+    public IdentificacionRequest(Integer idPersonaIdentificacion, Date fechaInicio, Date fechaFin, String descripcion, Integer idTipoIdentificacion, Integer idParte) {
+        this.idPersonaIdentificacion = idPersonaIdentificacion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descripcion = descripcion;
         this.idTipoIdentificacion = idTipoIdentificacion;
         this.idParte = idParte;
+    }
+
+    public Integer getIdPersonaIdentificacion() {
+        return idPersonaIdentificacion;
+    }
+
+    public void setIdPersonaIdentificacion(Integer idPersonaIdentificacion) {
+        this.idPersonaIdentificacion = idPersonaIdentificacion;
     }
 
     public Date getFechaInicio() {

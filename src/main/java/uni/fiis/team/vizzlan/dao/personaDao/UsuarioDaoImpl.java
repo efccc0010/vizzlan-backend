@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
-import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -78,13 +77,14 @@ public class UsuarioDaoImpl implements UsuarioDao {
     @Override
     public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception {
         Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO personaidentificacion VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO personaidentificacion VALUES(?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setDate(1,ir.getFechaInicio());
-        pst.setDate(2,ir.getFechaFin());
-        pst.setString(3,ir.getDescripcion());
-        pst.setInt(4,ir.getIdTipoIdentificacion());
-        pst.setInt(5,ir.getIdParte());
+        pst.setInt(1,ir.getIdPersonaIdentificacion());
+        pst.setDate(2,ir.getFechaInicio());
+        pst.setDate(3,ir.getFechaFin());
+        pst.setString(4,ir.getDescripcion());
+        pst.setInt(5,ir.getIdTipoIdentificacion());
+        pst.setInt(6,ir.getIdParte());
         pst.executeUpdate();
         pst.close();
         conn.close();
