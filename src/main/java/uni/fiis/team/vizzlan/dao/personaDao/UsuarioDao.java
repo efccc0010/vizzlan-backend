@@ -1,10 +1,10 @@
 package uni.fiis.team.vizzlan.dao.personaDao;
 
+import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
 import uni.fiis.team.vizzlan.request.personas.IdentificacionRequest;
 import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
 import uni.fiis.team.vizzlan.request.personas.PersonaRequest;
 import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
-import uni.fiis.team.vizzlan.response.personas.ParteResponse;
 
 import java.sql.SQLException;
 import java.util.List;

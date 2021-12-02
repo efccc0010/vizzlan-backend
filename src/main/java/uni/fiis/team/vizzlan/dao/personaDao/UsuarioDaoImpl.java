@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.persona.ParteResponse;
-import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public void RegistrarDatosPersonales(PersonaRequest pr) throws SQLException {
+    public void RegistrarDatosPersonales(uni.fiis.team.vizzlan.request.personas.PersonaRequest pr) throws Exception {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO personas VALUES(?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -45,7 +44,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public void RegistroCuenta(UsuarioRequest ur) throws Exception {
+    public void RegistroCuenta(uni.fiis.team.vizzlan.request.personas.UsuarioRequest ur) throws Exception {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO cuentausuario VALUES(?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -59,7 +58,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public void RegistrarContacto(MecanismoDeContactoRequest mcr) throws Exception {
+    public void RegistrarContacto(uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest mcr) throws Exception {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO mecanismocontacto VALUES(?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -74,9 +73,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
         conn.close();
     }
 
-
     @Override
-    public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception {
+    public void RegistroIdentificacion(uni.fiis.team.vizzlan.request.personas.IdentificacionRequest ir) throws Exception {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO personaidentificacion VALUES(?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
