@@ -4,6 +4,10 @@ package uni.fiis.team.vizzlan.dao.productoDao;
 
 import org.springframework.data.jpa.repository.Query;
 import uni.fiis.team.vizzlan.domain.producto.*;
+import uni.fiis.team.vizzlan.request.producto.CaracteristicasProductosRequest;
+import uni.fiis.team.vizzlan.request.producto.CategoriaProductosRequest;
+import uni.fiis.team.vizzlan.response.producto.CaracteristicaAplicadoProductoResponse;
+import uni.fiis.team.vizzlan.response.producto.CategoriaProductoResponse;
 
 import java.sql.SQLException;
 import java.util.List;

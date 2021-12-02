@@ -18,7 +18,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uni.fiis.team.vizzlan.domain.pedido.*;
 import uni.fiis.team.vizzlan.domain.producto.Producto;
-import uni.fiis.team.vizzlan.domain.producto.ProductoRequest;
+import uni.fiis.team.vizzlan.request.pedido.EnvioRequest;
+import uni.fiis.team.vizzlan.request.producto.ProductoRequest;
+import uni.fiis.team.vizzlan.response.pedido.DescuentoResponse;
 import uni.fiis.team.vizzlan.response.pedido.PedidoResponse;
 
 
@@ -27,6 +29,7 @@ public class PedidoDaoImpl implements PedidoDao{
     @Autowired
     private JdbcTemplate template;
 
+    @Override
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
        
             Connection conn = template.getDataSource().getConnection();
@@ -51,6 +54,7 @@ public class PedidoDaoImpl implements PedidoDao{
        //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void registroProductoCompra(Integer cod,ProductoRequest pd) throws SQLException{
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO articulos_pedido VALUES (?,?,?,?,?,?,?,?,?)";
@@ -68,13 +72,17 @@ public class PedidoDaoImpl implements PedidoDao{
         pst.close();
         conn.close();
     }
-        
-    public void registroMontoTotal(Integer cod,Float montoSub) throws Exception{
+    
+    @Override
+    public void registroMontoTotal(Integer cod,Float montoSub,Float desc) throws Exception{
         Connection conn =  template.getDataSource().getConnection();
-        String sql = "UPDATE pedido SET montoTotal= ? WHERE idPedido = ?";
+        String sql = "UPDATE pedido SET montoTotal = ? , subtotal = ? ,descuento = ? WHERE idPedido = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setDouble(1,montoSub);
-        pst.setInt(2,cod);
+        pst.setDouble(1,montoSub);        
+        String descuento = String .valueOf(montoSub - desc);
+        pst.setString(2,String.valueOf(descuento));
+        pst.setString(3,String.valueOf(desc));
+        pst.setInt(4,cod);
         pst.executeUpdate();
         pst.close();
         conn.close();
@@ -88,7 +96,7 @@ public class PedidoDaoImpl implements PedidoDao{
         pst.setInt(1,idProducto);
         pst.setString(2,Descuento);
         ResultSet rs = pst.executeQuery();
-        rs.next();
+        rs.next(); 
         DescuentoResponse resp = new DescuentoResponse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
         rs.close();
         pst.close();
@@ -166,4 +174,17 @@ public class PedidoDaoImpl implements PedidoDao{
         return resp;
     }
     
+    public Integer obtenerKey() throws SQLException{
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "select last_insert_id()";
+        Statement st = conn.createStatement();
+        
+        ResultSet rs = st.executeQuery(sql);
+        rs.next(); 
+        Integer resp = rs.getInt(1);
+        rs.close();
+        st.close();
+        conn.close();
+        return resp;
+    }
 }
