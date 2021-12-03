@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import uni.fiis.team.vizzlan.dao.personaDao.*;
 import uni.fiis.team.vizzlan.request.personas.IdentificacionRequest;
 import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
 import uni.fiis.team.vizzlan.request.personas.PersonaRequest;

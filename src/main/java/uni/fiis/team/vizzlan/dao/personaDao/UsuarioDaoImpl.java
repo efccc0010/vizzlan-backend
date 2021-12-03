@@ -29,8 +29,6 @@ public class UsuarioDaoImpl implements UsuarioDao {
         pst.close();
         conn.close();
         return obtenerKey();
-        
-        
     }
 
     @Override

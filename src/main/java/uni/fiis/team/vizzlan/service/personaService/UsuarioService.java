@@ -19,17 +19,17 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioDao usuarioDao;
-    
+
     private Integer codParte;
     private Integer codUsuario;
     private List<TipoMecanismoContactoResponse> listaTipoMecanismo;
-   
+
     public PersonaRequest RegistrarDatosPersonalesService(PersonaRequest personaRequest) throws Exception {
         this.codParte = usuarioDao.RegistrarTipoParte(personaRequest);
         personaRequest.setIdParte(this.codParte);
         return personaRequest;
     }
-    
+
     public UsuarioRequest RegistroCuenta(UsuarioRequest usuarioRequest) throws Exception{
         usuarioRequest.setIdParte(this.codParte);
         this.codUsuario = usuarioDao.RegistroCuenta(usuarioRequest);
@@ -57,11 +57,11 @@ public class UsuarioService {
     public List<ParteResponse> mostrarParte() throws Exception{
         return usuarioDao.selectParte();
     }
-    
+
     public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto()throws Exception{
         List<TipoMecanismoContactoResponse> lista = new ArrayList<>();
         this.listaTipoMecanismo = usuarioDao.mostrarTipoMecanismoContacto();
-        
+        return this.listaTipoMecanismo;
     }
             
 }
