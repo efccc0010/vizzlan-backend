@@ -3,16 +3,13 @@ package uni.fiis.team.vizzlan.request.personas;
 import java.sql.Date;
 
 public class MecanismoDeContactoRequest {
+    private Date fechaInicio;
+    private Date fechaFin;
+    private String descripcion;
+    private Integer idTipoMecanismoContacto;
+    private Integer idParte;
 
-    private Integer  idMecanismoContacto;
-    private Date  fechaInicio;
-    private Date  fechaFin;
-    private String  descripcion;
-    private Integer  idTipoMecanismoContacto;
-    private Integer  idParte;
-
-    public MecanismoDeContactoRequest(Integer idMecanismoContacto, Date fechaInicio, Date fechaFin, String descripcion, Integer idTipoMecanismoContacto, Integer idParte) {
-        this.idMecanismoContacto = idMecanismoContacto;
+    public MecanismoDeContactoRequest(java.sql.Date fechaInicio, java.sql.Date fechaFin, String descripcion, Integer  idTipoMecanismoContacto, Integer idParte) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descripcion = descripcion;
@@ -20,23 +17,23 @@ public class MecanismoDeContactoRequest {
         this.idParte = idParte;
     }
 
-    public Integer getIdMecanismoContacto() {
-        return idMecanismoContacto;
+    public Integer getIdTipoMecanismoContacto() {
+        return idTipoMecanismoContacto;
     }
 
-    public void setIdMecanismoContacto(Integer idMecanismoContacto) {
-        this.idMecanismoContacto = idMecanismoContacto;
+    public void setIdTipoMecanismoContacto(Integer idTipoMecanismoContacto) {
+        this.idTipoMecanismoContacto = idTipoMecanismoContacto;
     }
 
     public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = Date.valueOf(fechaInicio);
     }
 
-    public Date getFechaFin() {
+    public java.sql.Date getFechaFin() {
         return fechaFin;
     }
 
@@ -52,13 +49,6 @@ public class MecanismoDeContactoRequest {
         this.descripcion = descripcion;
     }
 
-    public Integer getIdTipoMecanismoContacto() {
-        return idTipoMecanismoContacto;
-    }
-
-    public void setIdTipoMecanismoContacto(Integer idTipoMecanismoContacto) {
-        this.idTipoMecanismoContacto = idTipoMecanismoContacto;
-    }
 
     public Integer getIdParte() {
         return idParte;

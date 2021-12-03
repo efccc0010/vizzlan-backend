@@ -9,9 +9,15 @@ import uni.fiis.team.vizzlan.response.personas.ParteResponse;
 import uni.fiis.team.vizzlan.request.personas.PersonaRequest;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import uni.fiis.team.vizzlan.request.personas.IdentificacionRequest;
 import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
 import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
+import uni.fiis.team.vizzlan.response.personas.MecanismoDeContactoResponse;
+import uni.fiis.team.vizzlan.response.personas.TipoIdentificacionResponse;
 import uni.fiis.team.vizzlan.response.personas.TipoMecanismoContactoResponse;
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao {
@@ -20,7 +26,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private JdbcTemplate template;
 
     @Override
-    public Integer RegistrarTipoParte(PersonaRequest pr) throws SQLException {
+    public void RegistrarTipoParte(PersonaRequest pr) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO parte(tipo) VALUES(?)";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -28,15 +34,14 @@ public class UsuarioDaoImpl implements UsuarioDao {
         pst.executeUpdate();
         pst.close();
         conn.close();
-        return obtenerKey();
     }
 
     @Override
-    public void RegistrarDatosPersonales(PersonaRequest pr) throws Exception {
+    public void RegistrarDatosPersonales(Integer idparte,PersonaRequest pr) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO personas VALUES(?,?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1,pr.getIdParte());
+        pst.setInt(1,idparte);
         pst.setString(2,pr.getNombre());
         pst.setString(3,pr.getApellido());
         pst.setDate(4,pr.getFechaNacimiento());
@@ -48,11 +53,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public Integer RegistroCuenta(UsuarioRequest ur) throws Exception {
+    public void RegistroCuenta(UsuarioRequest ur) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO cuentausuario(cuenta,contrasenia,idParte) VALUES (?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
-        
         pst.setString(1,ur.getCuenta());
         pst.setString(2,ur.getContrasenia());
         pst.setInt(3,ur.getIdParte());
@@ -60,30 +64,62 @@ public class UsuarioDaoImpl implements UsuarioDao {
         pst.close();
         conn.close();
         
-        return obtenerKey();
     }
-
+    
     @Override
-    public Integer RegistrarContacto(MecanismoDeContactoRequest mcr) throws Exception {
+    public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto() throws SQLException{
+        List<TipoMecanismoContactoResponse> res = new ArrayList<>();
+        Connection conn = template.getDataSource().getConnection();
+        Statement st = conn.createStatement();
+        String sql = "select * from tipomecanismocontacto";
+        ResultSet rs = st.executeQuery(sql);
+        while(rs.next()){
+            TipoMecanismoContactoResponse tmcr = new TipoMecanismoContactoResponse(rs.getInt(1),rs.getString(2));
+            res.add(tmcr);
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return res;
+    }
+    @Override
+    public void RegistrarContacto(MecanismoDeContactoRequest mcr) throws SQLException {
         Connection conn = template.getDataSource().getConnection();
         String sql = "INSERT INTO mecanismocontacto(fechaInicio,fechaFin,descripcion,idTipoMecanismoContacto,idParte) VALUES(?,?,?,?,?)";
+        /*String sql = "INSERT INTO mecanismocontacto(descripcion,idTipoMecanismoContacto,idParte) VALUES(?,?,?)";*/
         PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setDate(1,mcr.getFechaInicio());
-        pst.setDate(2,mcr.getFechaFin());
+        /*pst.setString(1,mcr.getDescripcion());
+        pst.setInt(2,mcr.getIdTipoMecanismoContacto());
+        pst.setInt(3,mcr.getIdParte());*/
+        pst.setDate(1,(Date)mcr.getFechaInicio());
+        pst.setDate(2,(Date)mcr.getFechaFin());
         pst.setString(3,mcr.getDescripcion());
         pst.setInt(4,mcr.getIdTipoMecanismoContacto());
         pst.setInt(5,mcr.getIdParte());
         pst.executeUpdate();
         pst.close();
         conn.close();
-        
-        return obtenerKey();
     }
-
     @Override
-    public void RegistroIdentificacion(uni.fiis.team.vizzlan.request.personas.IdentificacionRequest ir) throws Exception {
+    public List<TipoIdentificacionResponse> mostrarTipoIdentificacion() throws SQLException{
+        List<TipoIdentificacionResponse> res = new ArrayList<>();
         Connection conn = template.getDataSource().getConnection();
-        String sql = "INSERT INTO personaidentificacion VALUES(?,?,?,?,?)";
+        Statement st = conn.createStatement();
+        String sql = "select * from tipoidentificacion";
+        ResultSet rs = st.executeQuery(sql);
+        while(rs.next()){
+            TipoIdentificacionResponse tmcr = new TipoIdentificacionResponse(rs.getInt(1),rs.getString(2));
+            res.add(tmcr);
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return res;
+    }
+    @Override
+    public void RegistroIdentificacion(IdentificacionRequest ir) throws SQLException {
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "INSERT INTO personaidentificacion(fechaInicio,fechaFin,descripcion,idTipoIdentificacion,idParte) VALUES(?,?,?,?,?)";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setDate(1,ir.getFechaInicio());
         pst.setDate(2,ir.getFechaFin());
@@ -142,22 +178,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
         conn.close();
         return resp;
     }
-    public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto() throws SQLException{
-        List<TipoMecanismoContactoResponse> resp = new ArrayList<>();
-        Connection conn = template.getDataSource().getConnection();
-        String sql = "SELECT * from tipomecanismocontacto";
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        while(rs.next()){
-            TipoMecanismoContactoResponse tmcr = new TipoMecanismoContactoResponse(rs.getInt(1),rs.getString(2));
-            resp.add(tmcr);
-        }
-        rs.close();
-        st.close();
-        conn.close();
-        return resp;
-    }
     
+    
+    @Override
     public Integer obtenerKey() throws SQLException{
         Connection conn = template.getDataSource().getConnection();
         String sql = "select last_insert_id()";
@@ -170,5 +193,22 @@ public class UsuarioDaoImpl implements UsuarioDao {
         st.close();
         conn.close();
         return resp;
+    }
+    
+    @Override
+    public Integer buscarTipoMecanismoContacto(String descripcion) throws SQLException{
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "SELECT idTipoMecanismoContacto FROM tipomecanismocontacto WHERE descripcion LIKE '%" + descripcion + "'" ;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        Integer cod = 0;
+        while(rs.next()){
+            cod = rs.getInt(1);
+            break;
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return cod;
     }
 }

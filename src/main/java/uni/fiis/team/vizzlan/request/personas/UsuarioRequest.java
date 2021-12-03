@@ -1,8 +1,7 @@
 package uni.fiis.team.vizzlan.request.personas;
 
 public class UsuarioRequest {
-
-   private Integer idCuentasUsuario;
+ 
    private String cuenta;
    private String contrasenia;
    private Integer idParte;
@@ -11,14 +10,6 @@ public class UsuarioRequest {
         this.cuenta = cuenta;
         this.contrasenia = contrasenia;
         this.idParte = idParte;
-    }
-
-    public Integer getIdCuentasUsuario() {
-        return idCuentasUsuario;
-    }
-
-    public void setIdCuentasUsuario(Integer idCuentasUsuario) {
-        this.idCuentasUsuario = idCuentasUsuario;
     }
 
     public String getCuenta() {

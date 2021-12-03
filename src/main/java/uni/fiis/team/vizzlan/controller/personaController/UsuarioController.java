@@ -13,6 +13,12 @@ import uni.fiis.team.vizzlan.response.personas.ParteResponse;
 import uni.fiis.team.vizzlan.service.personaService.UsuarioService;
 
 import java.util.List;
+import uni.fiis.team.vizzlan.response.personas.IdentificacionResponse;
+import uni.fiis.team.vizzlan.response.personas.MecanismoDeContactoResponse;
+import uni.fiis.team.vizzlan.response.personas.PersonasResponse;
+import uni.fiis.team.vizzlan.response.personas.TipoIdentificacionResponse;
+import uni.fiis.team.vizzlan.response.personas.TipoMecanismoContactoResponse;
+import uni.fiis.team.vizzlan.response.personas.UsuarioResponse;
 
 @RestController
 public class UsuarioController {
@@ -21,22 +27,32 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/registrodatospersonalesprincipales")
-    public PersonaRequest RegistrarDatosPersonalesController(@RequestBody PersonaRequest personaRequest) throws Exception {
+    public PersonasResponse RegistrarDatosPersonalesController(@RequestBody PersonaRequest personaRequest) throws Exception {
         return usuarioService.RegistrarDatosPersonalesService(personaRequest);
     }
     
     @PostMapping("/registrocuentausuario")
-    public UsuarioRequest RegistroCuenta(@RequestBody UsuarioRequest usuarioRequest) throws Exception{
+    public UsuarioResponse RegistroCuenta(@RequestBody UsuarioRequest usuarioRequest) throws Exception{
         return usuarioService.RegistroCuenta(usuarioRequest);
     }
     
+    @GetMapping("/mostrarTipoMecanismoContacto")
+    public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto()throws Exception{
+        return usuarioService.mostrarTipoMecanismoContacto();
+    }
+    
     @PostMapping("/registromecanismocontacto")
-    public List<MecanismoDeContactoRequest> RegistrarContacto(@RequestBody List<MecanismoDeContactoRequest> mecanismoDeContactoRequests) throws Exception{
-        return usuarioService.RegistrarContacto(mecanismoDeContactoRequests);
+    public List<MecanismoDeContactoResponse> RegistrarContacto(@RequestBody List<MecanismoDeContactoRequest> mecanismoDeContactoRequest) throws Exception{
+        return usuarioService.RegistrarContacto(mecanismoDeContactoRequest);
+    }
+    
+    @GetMapping("/mostrarTipoIdentificacion")
+    public List<TipoIdentificacionResponse> mostrarTipoidentificacion()throws Exception{
+        return usuarioService.mostrarTipoIdentificacion();
     }
     
     @PostMapping("/registroidentificacion")
-    public String RegistroIdentificacion(@RequestBody List<IdentificacionRequest> identificacionRequests) throws Exception{
+    public List<IdentificacionResponse> RegistroIdentificacion(@RequestBody List<IdentificacionRequest> identificacionRequests) throws Exception{
         return usuarioService.RegistroIdentificacion(identificacionRequests);
     }
     
@@ -44,5 +60,5 @@ public class UsuarioController {
     public List<ParteResponse> mostrarUsuario()throws Exception{
         return usuarioService.mostrarParte();
     }
-
+    
 }
