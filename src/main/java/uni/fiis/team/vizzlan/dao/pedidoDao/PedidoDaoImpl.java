@@ -33,8 +33,10 @@ public class PedidoDaoImpl implements PedidoDao{
     public void registroPedidoInicio(PedidoNormal p) throws Exception {
        
             Connection conn = template.getDataSource().getConnection();
-            String sql = "INSERT INTO pedido(idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario,idEnvio) values(?,?,?,?,?,?,?,?)";
+            /*String sql = "INSERT INTO pedido(idPedido,fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario,idEnvio) values(?,?,?,?,?,?,?,?)";*/
+            String sql = "INSERT INTO pedido(fechaInicio,tipo,descripcion,estimacionEntrega,estado,idCuentasUsuario,idEnvio) values(?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
+            
             pst.setInt(1,p.getCodigo());
             pst.setDate(2,p.getFechaPedido());
             pst.setString(3,p.getTipo());
@@ -51,7 +53,7 @@ public class PedidoDaoImpl implements PedidoDao{
             pst.executeUpdate();
             pst.close();
             conn.close();
-       //To change body of generated methods, choose Tools | Templates.
+    
     }
 
     @Override
@@ -80,6 +82,8 @@ public class PedidoDaoImpl implements PedidoDao{
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setDouble(1,montoSub);        
         String descuento = String .valueOf(montoSub - desc);
+        
+        
         pst.setString(2,String.valueOf(descuento));
         pst.setString(3,String.valueOf(desc));
         pst.setInt(4,cod);
@@ -174,6 +178,7 @@ public class PedidoDaoImpl implements PedidoDao{
         return resp;
     }
     
+    @Override
     public Integer obtenerKey() throws SQLException{
         Connection conn = template.getDataSource().getConnection();
         String sql = "select last_insert_id()";

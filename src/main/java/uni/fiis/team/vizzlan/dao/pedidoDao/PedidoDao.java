@@ -31,4 +31,5 @@ public interface PedidoDao {
     public void registroDatosCliente (Integer cod,Integer cl) throws Exception;
     public List<PedidoResponse> selectProductos() throws SQLException;
     
+    public Integer obtenerKey() throws SQLException;
 }

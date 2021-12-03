@@ -3,26 +3,42 @@ package uni.fiis.team.vizzlan.response.personas;
 import java.sql.Date;
 
 public class ParteResponse {
+    private Integer idParte;
+    private String tipo;
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
     private String edad;
     private String genero;
-    private String tipo;
-    private String cuenta;
     private String correo;
-    private String dni;
+    private String cuenta;
 
-    public ParteResponse(String nombre, String apellido, Date fechaNacimiento, String edad, String genero, String tipo, String cuenta, String correo, String dni) {
+    public ParteResponse(Integer idParte, String tipo, String nombre, String apellido, Date fechaNacimiento, String edad, String genero, String correo, String cuenta) {
+        this.idParte = idParte;
+        this.tipo = tipo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
         this.edad = edad;
         this.genero = genero;
-        this.tipo = tipo;
-        this.cuenta = cuenta;
         this.correo = correo;
-        this.dni = dni;
+        this.cuenta = cuenta;
+    }
+
+    public Integer getIdParte() {
+        return idParte;
+    }
+
+    public void setIdParte(Integer idParte) {
+        this.idParte = idParte;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -65,12 +81,12 @@ public class ParteResponse {
         this.genero = genero;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getCuenta() {
@@ -81,19 +97,5 @@ public class ParteResponse {
         this.cuenta = cuenta;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+   
 }

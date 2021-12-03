@@ -136,40 +136,41 @@ public class UsuarioDaoImpl implements UsuarioDao {
         List<ParteResponse> resp = new ArrayList<>();
         Connection conn = template.getDataSource().getConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT  p.nombre, \n" +
-                "\t\tp.apellido, \n" +
-                "\t\tp.fechaNacimiento, \n" +
-                "\t\tp.edad, \n" +
-                "\t\tp.genero, \n" +
-                "        pa.tipo,\n" +
-                "        cu.cuenta,\n" +
-                "        mc.descripcion as correo,\n" +
-                "        pi.descripcion as dni\n" +
-                "FROM personas as p \n" +
-                "INNER JOIN parte as pa \n" +
-                "\tON pa.idParte = p.idParte\n" +
-                "INNER JOIN cuentausuario as cu \n" +
-                "\tON cu.idParte = p.idParte\n" +
-                "INNER JOIN mecanismocontacto as mc \n" +
-                "\tON mc.idParte = pa.idParte\n" +
-                "INNER JOIN tipomecanismocontacto as tmc \n" +
-                "\tON tmc.idTipoMecanismoContacto = mc.idTipoMecanismoContacto\n" +
-                "INNER JOIN personaidentificacion as pi\n" +
-                "\tON pi.idParte = p.idParte\n" +
-                "INNER JOIN tipoidentificacion as ti \n" +
-                "\tON ti.idTipoIdentificacion = pi.idTipoIdentificacion\n" +
-                "WHERE tmc.descripcion = \"GMAIL\" and ti.descripcion = \"DNI\"");
+        ResultSet rs = st.executeQuery("select *\n" +
+                                        "from parte\n" +
+                                        "inner join cuentausuario\n" +
+                                        "	on cuentausuario.idParte = parte.idParte\n" +
+                                        "inner join (select p.idParte,\n" +
+                                        "			   p.nombre,\n" +
+                                        "			   p.apellido,\n" +
+                                        "			   p.fechaNacimiento,\n" +
+                                        "			   p.edad,\n" +
+                                        "			   p.genero,\n" +
+                                        "			   r.valor,\n" +
+                                        "			   r.tipo\n" +
+                                        "		from personas as p\n" +
+                                        "		left join (SELECT mc.idParte as parte,\n" +
+                                        "						  mc.fechaInicio,\n" +
+                                        "						  mc.fechaFin,\n" +
+                                        "						  mc.descripcion as valor,\n" +
+                                        "						  tmc.descripcion as tipo\n" +
+                                        "					from mecanismocontacto as mc\n" +
+                                        "					inner join tipomecanismocontacto as tmc\n" +
+                                        "						on tmc.idTipoMecanismoContacto = mc.idTipoMecanismoContacto\n" +
+                                        "					where tmc.descripcion = \"Correo electronico\") as r\n" +
+                                        "		on r.parte = p.idParte) as k\n" +
+                                        "on k.idParte = parte.idParte");
         while(rs.next()){
             ParteResponse dept = new ParteResponse(
-                    rs.getString(1),
+                    rs.getInt(1),
                     rs.getString(2),
-                    rs.getDate(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getString(7),
                     rs.getString(8),
-                    rs.getString(9)
+                    rs.getString(9),
+                    rs.getDate(10),
+                    rs.getString(11),
+                    rs.getString(12),
+                    rs.getString(13),
+                    rs.getString(4)
             );
             resp.add(dept);
         }
