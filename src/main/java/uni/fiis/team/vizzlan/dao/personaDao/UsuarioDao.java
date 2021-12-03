@@ -5,7 +5,7 @@ import uni.fiis.team.vizzlan.request.personas.IdentificacionRequest;
 import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
 import uni.fiis.team.vizzlan.request.personas.PersonaRequest;
 import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
-
+import uni.fiis.team.vizzlan.response.personas.TipoMecanismoContactoResponse;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,4 +17,5 @@ public interface UsuarioDao {
     public Integer RegistrarContacto(MecanismoDeContactoRequest mcr) throws Exception;
     public void RegistroIdentificacion(IdentificacionRequest ir) throws Exception;
     public List<ParteResponse> selectParte() throws SQLException;
+    public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto() throws SQLException;
 }

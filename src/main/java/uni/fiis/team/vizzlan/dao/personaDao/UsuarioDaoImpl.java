@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import uni.fiis.team.vizzlan.request.personas.UsuarioRequest;
 import uni.fiis.team.vizzlan.request.personas.MecanismoDeContactoRequest;
+import uni.fiis.team.vizzlan.response.personas.TipoMecanismoContactoResponse;
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -137,6 +138,21 @@ public class UsuarioDaoImpl implements UsuarioDao {
                     rs.getString(9)
             );
             resp.add(dept);
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return resp;
+    }
+    public List<TipoMecanismoContactoResponse> mostrarTipoMecanismoContacto() throws SQLException{
+        List<TipoMecanismoContactoResponse> resp = new ArrayList<>();
+        Connection conn = template.getDataSource().getConnection();
+        String sql = "SELECT * from tipomecanismocontacto";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        while(rs.next()){
+            TipoMecanismoContactoResponse tmcr = new TipoMecanismoContactoResponse(rs.getInt(1),rs.getString(2));
+            resp.add(tmcr);
         }
         rs.close();
         st.close();
